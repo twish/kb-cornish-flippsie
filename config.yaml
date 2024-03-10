@@ -152,7 +152,7 @@ pcbs:
         outline: board
     footprints:
       mx_hotswap:
-        what: mxlp
+        what: ks33
         where: true
         params:
           keycaps: true
@@ -167,12 +167,25 @@ pcbs:
           from: "{{colrow}}"
           to: "{{row_net}}"
         adjust:
-          shift: [0, -5]
-      # TODO: Need to make sure proMicro is reversable.
-      promicro:
-        what: promicro
+          shift: [0, 5]
+      via_col:
+        what: via
+        where: true
         params:
-          orientation: "down"
+          net: "{{column_net}}"
+        adjust:
+          shift: [-5, 0]
+      via_row:
+        what: via
+        where: true
+        params:
+          net: "{{row_net}}"
+        adjust:
+          shift: [5, 0]
+      promicro:
+        what: promicro_pretty
+        # params:
+        #   orientation: "down"
         where:
           ref: macro_media_two
           shift: [1px, -0py-7]
@@ -220,12 +233,12 @@ pcbs:
         what: mountinghole
         where:
           ref: main_pinky_bottom
-          shift: [0.5px-1, 0.5py-2]
+          shift: [0.5px-3.5, 0.5py-2.5]
       topMiddle:
         what: mountinghole
         where:
           ref: main_middle_home
-          shift: [0.5px-2, 0.5py-2]
+          shift: [0.5px-2, 0.5py-8]
       bottomMiddle:
         what: mountinghole
         where:
@@ -240,5 +253,5 @@ pcbs:
         what: mountinghole
         where:
           ref: macro_media_one
-          shift: [0.5px+3, -0.5py-5]
+          shift: [3, -0.5py-5]
 
