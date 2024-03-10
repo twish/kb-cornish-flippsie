@@ -1,0 +1,244 @@
+units:
+  #proxy spacing variables
+  kx: u
+  ky: u
+  #padding
+  px: kx + 4
+  py: ky + 4
+  # preview defaults
+  $default_width: u
+  $default_height: u
+
+points:
+  zones:
+    main:
+      anchor:
+        shift: [180, -70]
+      key:
+        padding: 1ky
+        spread: 1kx
+      columns:
+        pinky:
+          key:
+            column_net: P9
+        ring:
+          key.splay: -5
+          key.origin: [-12, -19]
+          key.stagger: 12
+          key.column_net: P10
+        middle:
+          key.stagger: 5
+          key.column_net: P16
+        index:
+          key.stagger: -6
+          key.column_net: P14
+        index2:
+          key.column_net: P15
+      rows:
+        bottom:
+          row_net: P19
+        home:
+          row_net: P20
+        top:
+          row_net: P21
+    thumb:
+      key:
+        padding: 1ky
+        spread: 1ky
+      anchor:
+        ref: main_index2_bottom
+        shift: [-0.7kx-1, -1py+1]
+      columns:
+        mod:
+          key:
+            width: 1.5kx
+            column_net: P14
+        layer:
+          key:
+            splay: -15
+            shift: [8, -1]
+            column_net: P15
+        space:
+          key:
+            splay: -15
+            shift: [11.5, 4]
+            width: 1.5kx
+            rotate: 90
+            column_net: P18
+      rows:
+        cluster:
+          row_net: P4
+    macro:
+      key:
+        padding: 1ky
+        spread: 1ky
+      anchor:
+        ref: main_index2_bottom
+        shift: [1kx+5, 5]
+      columns:
+        media:
+          key.column_net: P18
+      rows:
+        one:
+          row_net: P19
+        two:
+          row_net: P20
+  rotate: -20
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [px+2, py+2]
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5, ky-0.5]
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: main_pinky_top
+          shift: [-0.5px, 0.5py]
+        - ref: main_pinky_top
+          shift: [0.5px+1, 0.5py]
+        - ref: main_ring_top
+          shift: [-0.5px, 0.5py]
+        - ref: main_ring_top
+          shift: [0.5px-4, 0.5py]
+        - ref: main_middle_top
+          shift: [-0.5px, 0.5py]
+        - ref: main_middle_top
+          shift: [0.5px, 0.5py]
+        - ref: main_index_top
+          shift: [-0.5px+4, 0.5py]
+        - ref: main_index2_top
+          shift: [0.5px+9, 0.5py]
+        # Controller?
+        - ref: macro_media_two
+          shift: [0.5px, 0.5py]
+        - ref: macro_media_two
+          shift: [1.5px, 0.5py]
+        - ref: thumb_space_cluster
+          shift: [0.75px+10, -0.5py]
+        - ref: thumb_space_cluster
+          shift: [-0.75px, -0.5py]
+        - ref: thumb_space_cluster
+          shift: [-0.75px+0.5, 0.5py-2]
+        - ref: thumb_layer_cluster
+          shift: [-0.5px+1, -0.5py]
+        - ref: thumb_mod_cluster
+          shift: [-0.75px+1, -0.5py]
+        - ref: main_middle_bottom
+          shift: [0.5px-4, -0.5py]
+        - ref: main_middle_bottom
+          shift: [-0.5px+4, -0.5py]
+        - ref: main_ring_bottom
+          shift: [0.5px, -0.5py]
+        - ref: main_ring_bottom
+          shift: [-0.5px+3.5, -0.5py]
+        - ref: main_pinky_bottom
+          shift: [0.5px, -0.5py]
+        - ref: main_pinky_bottom
+          shift: [-0.5px, -0.5py]
+      fillet: 2
+  combo:
+    - name: board
+    - operation: subtract
+      name: keys
+pcbs:
+  cornish:
+    outlines:
+      main:
+        outline: board
+    footprints:
+      mx_hotswap:
+        what: mxlp
+        where: true
+        params:
+          keycaps: true
+          reverse: true
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      # TODO: Need to make sure proMicro is reversable.
+      promicro:
+        what: promicro
+        params:
+          orientation: "down"
+        where:
+          ref: macro_media_two
+          shift: [1px, -0py-7]
+          rotate: -90
+      oled:
+        what: oled
+        params:
+          side: "F"
+          SDA: P2
+          SCL: P3
+        where:
+          ref: macro_media_two
+          shift: [1px+6, -22.5]
+          rotate: -90
+      #Change in kicad to angled switch...
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RST
+        where:
+          ref: macro_media_two
+          shift: [1px, -1px-8]
+          rotate: 90
+      trrs:
+        what: trrs
+        where:
+          ref: macro_media_two
+          shift: [-7, 1py+2]
+          rotate: 0
+        params:
+          reverse: true
+          symmetric: true
+          A: GND
+          B: GND
+          C: P1
+          D: VCC
+      # Mounting holes
+      topLeft:
+        what: mountinghole
+        where:
+          ref: main_pinky_top
+          shift: [0.5px, 3]
+      bottomLeft:
+        what: mountinghole
+        where:
+          ref: main_pinky_bottom
+          shift: [0.5px-1, 0.5py-2]
+      topMiddle:
+        what: mountinghole
+        where:
+          ref: main_middle_home
+          shift: [0.5px-2, 0.5py-2]
+      bottomMiddle:
+        what: mountinghole
+        where:
+          ref: thumb_mod_cluster
+          shift: [-0.5px, 0.5py-2]
+      topRight:
+        what: mountinghole
+        where:
+          ref: macro_media_two
+          shift: [0, 0.5py+4]
+      bottomeRight:
+        what: mountinghole
+        where:
+          ref: macro_media_one
+          shift: [0.5px+3, -0.5py-5]
+
