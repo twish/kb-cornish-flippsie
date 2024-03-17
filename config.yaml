@@ -5,6 +5,9 @@ units:
   #padding
   px: kx + 4
   py: ky + 4
+  #board
+  bx: kx + 1
+  by: ky + 1
   # preview defaults
   $default_width: u
   $default_height: u
@@ -98,48 +101,48 @@ outlines:
       operation: stack
       points:
         - ref: main_pinky_top
-          shift: [-0.5px, 0.5py]
+          shift: [-0.5bx, 0.5by]
         - ref: main_pinky_top
-          shift: [0.5px+1, 0.5py]
+          shift: [0.5bx+4, 0.5by]
         - ref: main_ring_top
-          shift: [-0.5px, 0.5py]
+          shift: [-0.5bx, 0.5by]
         - ref: main_ring_top
-          shift: [0.5px-4, 0.5py]
+          shift: [0.5bx-1, 0.5by]
         - ref: main_middle_top
-          shift: [-0.5px, 0.5py]
+          shift: [-0.5bx, 0.5by]
         - ref: main_middle_top
-          shift: [0.5px, 0.5py]
+          shift: [0.5bx, 0.5by]
         - ref: main_index_top
-          shift: [-0.5px+4, 0.5py]
+          shift: [-0.5bx+1, 0.5by]
         - ref: main_index2_top
-          shift: [0.5px+9, 0.5py]
+          shift: [0.5bx+10, 0.5by]
         # Controller?
         - ref: macro_media_two
-          shift: [0.5px, 0.5py]
+          shift: [0.5bx, 0.5by]
         - ref: macro_media_two
-          shift: [1.5px, 0.5py]
+          shift: [1.5bx+4, 0.5by]
         - ref: thumb_space_cluster
-          shift: [0.75px+10, -0.5py]
+          shift: [0.75bx+12, -0.5by]
         - ref: thumb_space_cluster
-          shift: [-0.75px, -0.5py]
+          shift: [-0.75bx, -0.5by]
         - ref: thumb_space_cluster
-          shift: [-0.75px+0.5, 0.5py-2]
+          shift: [-0.75bx+0.5, 0.5by-2]
         - ref: thumb_layer_cluster
-          shift: [-0.5px+1, -0.5py]
+          shift: [-0.5bx+1, -0.5by]
         - ref: thumb_mod_cluster
-          shift: [-0.75px+1, -0.5py]
+          shift: [-0.75bx+1, -0.5by]
         - ref: main_middle_bottom
-          shift: [0.5px-4, -0.5py]
+          shift: [0.5bx-1, -0.5by]
         - ref: main_middle_bottom
-          shift: [-0.5px+4, -0.5py]
+          shift: [-0.5bx+1, -0.5by]
         - ref: main_ring_bottom
-          shift: [0.5px, -0.5py]
+          shift: [0.5bx, -0.5by]
         - ref: main_ring_bottom
-          shift: [-0.5px+3.5, -0.5py]
+          shift: [-0.5bx+0.5, -0.5by]
         - ref: main_pinky_bottom
-          shift: [0.5px, -0.5py]
+          shift: [0.5bx, -0.5by]
         - ref: main_pinky_bottom
-          shift: [-0.5px, -0.5py]
+          shift: [-0.5bx, -0.5by]
       fillet: 2
   combo:
     - name: board
@@ -188,7 +191,7 @@ pcbs:
         #   orientation: "down"
         where:
           ref: macro_media_two
-          shift: [1px, -0py-7]
+          shift: [1px, -0py-8]
           rotate: -90
       oled:
         what: oled
@@ -198,7 +201,7 @@ pcbs:
           SCL: P3
         where:
           ref: macro_media_two
-          shift: [1px+6, -22.5]
+          shift: [1px+6, -23.5]
           rotate: -90
       #Change in kicad to angled switch...
       reset:
@@ -208,13 +211,13 @@ pcbs:
           to: RST
         where:
           ref: macro_media_two
-          shift: [1px, -1px-8]
+          shift: [1px, -1py-9]
           rotate: 90
       trrs:
         what: trrs
         where:
           ref: macro_media_two
-          shift: [-7, 1py+2]
+          shift: [-7, 1py]
           rotate: 0
         params:
           reverse: true
