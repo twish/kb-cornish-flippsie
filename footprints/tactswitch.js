@@ -1,10 +1,9 @@
 module.exports = {
-    nets: {
-        from: undefined,
-        to: undefined
-    },
     params: {
         class: 'B', // for Button
+        from: undefined,
+        to: undefined
+
     },
     body: p => `
     (module TACT_SWITCH_TVBP06 (layer F.Cu) (tedit 5B8CD44F)
@@ -35,8 +34,8 @@ module.exports = {
   (fp_line (start 3 1.7) (end 3 1.1) (layer B.SilkS) (width 0.15))
   (fp_line (start -3 1.7) (end -3 1.1) (layer B.SilkS) (width 0.15))
   (fp_line (start -3 -1.8) (end -3 -1.1) (layer B.SilkS) (width 0.15))
-  (pad 1 thru_hole circle (at -3.25 0) (size 2 2) (drill 1.3) (layers *.Cu *.Mask) ${p.net.from.str})
-  (pad 2 thru_hole circle (at 3.25 0) (size 2 2) (drill 1.3) (layers *.Cu *.Mask) ${p.net.to.str})
+  (pad 1 thru_hole circle (at -3.25 0) (size 2 2) (drill 1.3) (layers *.Cu *.Mask) ${p.from})
+  (pad 2 thru_hole circle (at 3.25 0) (size 2 2) (drill 1.3) (layers *.Cu *.Mask) ${p.to})
 )
     
     `

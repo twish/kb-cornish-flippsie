@@ -164,7 +164,7 @@ pcbs:
           from: "{{column_net}}"
           to: "{{colrow}}"
       diode:
-        what: diode
+        what: diode_pretty
         where: true
         params:
           from: "{{colrow}}"
@@ -201,18 +201,18 @@ pcbs:
           SCL: P3
         where:
           ref: macro_media_two
-          shift: [1px+6, -23.5]
-          rotate: -90
+          shift: [1px-6, -27.5]
+          rotate: -270
       #Change in kicad to angled switch...
       reset:
-        what: button
+        what: sw_tactile_angle
         params:
           from: GND
           to: RST
         where:
-          ref: macro_media_two
-          shift: [1px, -1py-9]
-          rotate: 90
+          ref: thumb_space_cluster
+          shift: [1px+1, -0.5py+5]
+          rotate: 180 
       trrs:
         what: trrs
         where:
