@@ -1,14 +1,14 @@
 {
-    "manufacturer": "Johannes Tveitan",
+    "manufacturer": "twish",
     "keyboard_name": "cornish_flippsie",
-    "maintainer": "Johannes Tveitan",
+    "maintainer": "twish",
     "bootloader": "caterina",
     "diode_direction": "COL2ROW",
     "features": {
         "bootmagic": true,
         "command": false,
         "extrakey": true,
-        "mousekey": true,
+        "mousekey": false,
         "nkro": true
     },
     "matrix_pins": {
