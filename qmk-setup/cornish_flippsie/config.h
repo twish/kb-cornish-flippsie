@@ -43,8 +43,12 @@
 #define SPLIT_CONNECTION_CHECK_TIMEOUT 500
 
 /* Enables communication of layer state to both halves of keyboard for oled display */
-#define SPLIT_LAYER_STATE_ENABLE
-#define SPLIT_LED_STATE_ENABLE
-#define SPLIT_MODS_ENABLE
-#define SPLIT_OLED_ENABLE
+/* #define SPLIT_LAYER_STATE_ENABLE */
+//#define SPLIT_LED_STATE_ENABLE
+//#define SPLIT_MODS_ENABLE
+/* #define SPLIT_OLED_ENABLE */
 
+
+// OLED
+//#define OLED_BRIGHTNESS 172
+#define OLED_UPDATE_INTERVAL 50

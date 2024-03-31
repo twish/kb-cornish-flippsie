@@ -1,7 +1,12 @@
-// Copyright 2024 Johannes Tveitan (@twish)
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
+
+enum layer_names {
+    _DEFAULT,
+    _NUM,
+    _NAV
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_ortho_split_3x10_3_2(
@@ -39,33 +44,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-#ifdef OLED_DRIVER_ENABLE
-
+#ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (!is_keyboard_master())
-        return OLED_ROTSTION_180;
+    if (is_keyboard_master()) {
+        return OLED_ROTATION_270;
+    }
+
     return rotation;
 }
 
-void oled_task_user(void) {
-    // Host Keyboard Layer Status
-    oled_write_P(PSTR("L: "), false);
-    switch (get_highest_layer(layer_state)) {
-        case 0:
-            oled_write_P(PSTR("0\n"), false);
-            break;
-        case 1:
-            oled_write_P(PSTR("1\n"), false);
-            break;
-        case 2:
-            oled_write_P(PSTR("2\n"), false);
-            break;
+void keyboard_post_init_user(void) {
+    // debug_enable=true;
+}
 
-		default:
-            // Or use the write_ln shortcut over adding '\n' to the end of your string
-            oled_write_ln_P(PSTR("Undefined"), false);
-		}
-	    oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
-		oled_write_ln(read_host_led_state(), false);
-	}
+bool oled_task_user(void) {
+    if (is_keyboard_master()) {
+        // Host Keyboard Layer Status
+        oled_write_P(PSTR("\n"), false);
+        oled_write_P(PSTR(">>"), false);
+
+        switch (get_highest_layer(layer_state)) {
+            case _DEFAULT:
+                oled_write_P(PSTR("STD\n"), false);
+                break;
+            case _NUM:
+                oled_write_P(PSTR("NUM\n"), false);
+                break;
+            case _NAV:
+                oled_write_P(PSTR("CMD\n"), false);
+                break;
+            default:
+                // Or use the write_ln shortcut over adding '\n' to the end of your string
+                oled_write_ln_P(PSTR("ERR"), false);
+        }
+
+        // Host Keyboard LED Status
+        //led_t led_state = host_keyboard_led_state();
+        //oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
+        //oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
+        //oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
+    } else {
+        // Slave side should never render...
+    }
+    return false;
+}
 #endif
