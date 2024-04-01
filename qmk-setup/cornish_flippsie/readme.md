@@ -13,13 +13,27 @@ The keyboard uses Gateron low profile switches, as I wanted something that resem
 
 Make example for this keyboard (after setting up your build environment):
 
-    make cornish_flippsie:default
+    make twish/cornish_flippsie:default
 
 Flashing example for this keyboard:
 
-    make cornish_flippsie:default:flash
+    make twish/cornish_flippsie:default:flash
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
+
+## Vial support
+
+This keyboard has support for configuration through Vial. To build the firmware for Vial, get your Vial environment set up and symlimk the `qmk-setup` dir to the `keyboards/twish` catalogue in the vial installation dir.
+Then run the following commands:
+
+Make example for this keyboard (after setting up your build environment):
+
+    make twish/cornish_flippsie:vial
+
+Flashing example for this keyboard:
+
+    make twish/cornish_flippsie:vial:flash
+
 
 ## Bootloader
 
