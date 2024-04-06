@@ -1,4 +1,5 @@
 # cornish_flippsie by twish
+# TODO: Change text
 # v1 still requires some modifications in kicad to work, moving to another switch can be good for example, 
 # also the display connector on the right side becomes reversed for most displays with soldered on pins. 
 
@@ -100,6 +101,10 @@ outlines:
     - what: rectangle
       where: true
       size: [kx-0.5, ky-0.5]
+  plate_holes:
+    - what: rectangle
+      where: true
+      size: [14.1, 14.1]
   board:
     - what: polygon
       operation: stack
@@ -152,7 +157,47 @@ outlines:
     - name: board
     - operation: subtract
       name: keys
+  plate:
+    - name: board
+    - operation: subtract
+      name: plate_holes
 pcbs:
+  cornish_plate:
+    outlines:
+      main: 
+        outline: plate
+    footprints:
+      # Mounting holes
+      topLeft:
+        what: mountinghole
+        where:
+          ref: main_pinky_top
+          shift: [0.5px, 3]
+      bottomLeft:
+        what: mountinghole
+        where:
+          ref: main_pinky_bottom
+          shift: [0.5px-3.5, 0.5py-2.5]
+      topMiddle:
+        what: mountinghole
+        where:
+          ref: main_middle_home
+          shift: [0.5px-2, 0.5py-8]
+      bottomMiddle:
+        what: mountinghole
+        where:
+          ref: thumb_mod_cluster
+          shift: [-0.5px, 0.5py-2]
+      topRight:
+        what: mountinghole
+        where:
+          ref: macro_media_two
+          shift: [0, 0.5py+4]
+      bottomeRight:
+        what: mountinghole
+        where:
+          ref: macro_media_one
+          shift: [3, -0.5py-5]
   cornish:
     outlines:
       main:
