@@ -1,2 +1,5 @@
 .DS_Store
 backup/
+**/*_autosave*
+kicad/**/*-backups/
+kicad/v*/**/cornish-v*/
