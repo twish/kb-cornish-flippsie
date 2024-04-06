@@ -1,3 +1,7 @@
+# cornish_flippsie by twish
+# v1 still requires some modifications in kicad to work, moving to another switch can be good for example, 
+# also the display connector on the right side becomes reversed for most displays with soldered on pins. 
+
 units:
   #proxy spacing variables
   kx: u
@@ -187,8 +191,6 @@ pcbs:
           shift: [5, 0]
       promicro:
         what: promicro_pretty
-        # params:
-        #   orientation: "down"
         where:
           ref: macro_media_two
           shift: [1px, -0py-8]
